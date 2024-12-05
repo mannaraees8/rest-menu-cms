@@ -13,6 +13,11 @@ export interface Config {
   collections: {
     users: User;
     categories: Category;
+    menuItems: MenuItem;
+    ingredients: Ingredient;
+    'nutritional-information': NutritionalInformation;
+    reviews: Review;
+    specials: Special;
     media: Media;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -22,6 +27,11 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
+    menuItems: MenuItemsSelect<false> | MenuItemsSelect<true>;
+    ingredients: IngredientsSelect<false> | IngredientsSelect<true>;
+    'nutritional-information': NutritionalInformationSelect<false> | NutritionalInformationSelect<true>;
+    reviews: ReviewsSelect<false> | ReviewsSelect<true>;
+    specials: SpecialsSelect<false> | SpecialsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -83,7 +93,6 @@ export interface User {
 export interface Category {
   id: number;
   title: string;
-  url?: string | null;
   content?: {
     root: {
       type: string;
@@ -131,6 +140,164 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menuItems".
+ */
+export interface MenuItem {
+  id: number;
+  name: string;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  price: number;
+  category: number | Category;
+  image?: (number | null) | Media;
+  isActive?: boolean | null;
+  createdBy?: (number | null) | User;
+  modifiedBy?: (number | null) | User;
+  metaTitle?: string | null;
+  metaDescription?: string | null;
+  metaKeywords?: string | null;
+  metaImage?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ingredients".
+ */
+export interface Ingredient {
+  id: number;
+  name: string;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  image?: (number | null) | Media;
+  isActive?: boolean | null;
+  createdBy?: (number | null) | User;
+  modifiedBy?: (number | null) | User;
+  metaTitle?: string | null;
+  metaDescription?: string | null;
+  metaKeywords?: string | null;
+  metaImage?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "nutritional-information".
+ */
+export interface NutritionalInformation {
+  id: number;
+  menuItem: number | MenuItem;
+  calories: number;
+  fat: number;
+  carbohydrates: number;
+  protein: number;
+  createdBy?: (number | null) | User;
+  modifiedBy?: (number | null) | User;
+  metaTitle?: string | null;
+  metaDescription?: string | null;
+  metaKeywords?: string | null;
+  metaImage?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reviews".
+ */
+export interface Review {
+  id: number;
+  menuItem: number | MenuItem;
+  customerName: string;
+  rating: number;
+  comment?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  date: string;
+  createdBy?: (number | null) | User;
+  modifiedBy?: (number | null) | User;
+  metaTitle?: string | null;
+  metaDescription?: string | null;
+  metaKeywords?: string | null;
+  metaImage?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "specials".
+ */
+export interface Special {
+  id: number;
+  name: string;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  price: number;
+  startDate: string;
+  endDate: string;
+  image?: (number | null) | Media;
+  isActive?: boolean | null;
+  createdBy?: (number | null) | User;
+  modifiedBy?: (number | null) | User;
+  metaTitle?: string | null;
+  metaDescription?: string | null;
+  metaKeywords?: string | null;
+  metaImage?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -143,6 +310,26 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'categories';
         value: number | Category;
+      } | null)
+    | ({
+        relationTo: 'menuItems';
+        value: number | MenuItem;
+      } | null)
+    | ({
+        relationTo: 'ingredients';
+        value: number | Ingredient;
+      } | null)
+    | ({
+        relationTo: 'nutritional-information';
+        value: number | NutritionalInformation;
+      } | null)
+    | ({
+        relationTo: 'reviews';
+        value: number | Review;
+      } | null)
+    | ({
+        relationTo: 'specials';
+        value: number | Special;
       } | null)
     | ({
         relationTo: 'media';
@@ -211,8 +398,104 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface CategoriesSelect<T extends boolean = true> {
   title?: T;
-  url?: T;
   content?: T;
+  image?: T;
+  isActive?: T;
+  createdBy?: T;
+  modifiedBy?: T;
+  metaTitle?: T;
+  metaDescription?: T;
+  metaKeywords?: T;
+  metaImage?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menuItems_select".
+ */
+export interface MenuItemsSelect<T extends boolean = true> {
+  name?: T;
+  description?: T;
+  price?: T;
+  category?: T;
+  image?: T;
+  isActive?: T;
+  createdBy?: T;
+  modifiedBy?: T;
+  metaTitle?: T;
+  metaDescription?: T;
+  metaKeywords?: T;
+  metaImage?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ingredients_select".
+ */
+export interface IngredientsSelect<T extends boolean = true> {
+  name?: T;
+  description?: T;
+  image?: T;
+  isActive?: T;
+  createdBy?: T;
+  modifiedBy?: T;
+  metaTitle?: T;
+  metaDescription?: T;
+  metaKeywords?: T;
+  metaImage?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "nutritional-information_select".
+ */
+export interface NutritionalInformationSelect<T extends boolean = true> {
+  menuItem?: T;
+  calories?: T;
+  fat?: T;
+  carbohydrates?: T;
+  protein?: T;
+  createdBy?: T;
+  modifiedBy?: T;
+  metaTitle?: T;
+  metaDescription?: T;
+  metaKeywords?: T;
+  metaImage?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reviews_select".
+ */
+export interface ReviewsSelect<T extends boolean = true> {
+  menuItem?: T;
+  customerName?: T;
+  rating?: T;
+  comment?: T;
+  date?: T;
+  createdBy?: T;
+  modifiedBy?: T;
+  metaTitle?: T;
+  metaDescription?: T;
+  metaKeywords?: T;
+  metaImage?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "specials_select".
+ */
+export interface SpecialsSelect<T extends boolean = true> {
+  name?: T;
+  description?: T;
+  price?: T;
+  startDate?: T;
+  endDate?: T;
   image?: T;
   isActive?: T;
   createdBy?: T;

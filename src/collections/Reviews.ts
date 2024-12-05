@@ -1,20 +1,20 @@
 import { CollectionConfig } from 'payload'
-import { beforeChangeLanguageHook, setCreatedBy, setModifiedBy } from './hooks/hooks'
+import { setCreatedBy, setModifiedBy } from './hooks/hooks'
 import seoFields from './fields/seoFields'
 
 const Reviews: CollectionConfig = {
   slug: 'reviews',
   admin: {
-    useAsTitle: 'menuItem',
+    useAsTitle: 'customerName',
   },
   fields: [
     {
       name: 'menuItem',
       label: 'Menu Item',
       type: 'relationship',
-      relationTo: 'menuItems',
       required: true,
       index: true,
+      relationTo: 'menuItems',
     },
     {
       name: 'customerName',
@@ -78,6 +78,14 @@ const Reviews: CollectionConfig = {
   ],
   access: {
     read: () => true,
+  },
+  hooks: {
+    beforeChange: [
+      async (args) => {
+        console.log(args)
+        return args
+      },
+    ],
   },
 }
 

@@ -1,5 +1,5 @@
 import { CollectionConfig } from 'payload'
-import { beforeChangeLanguageHook, setCreatedBy, setModifiedBy } from './hooks/hooks'
+import { setCreatedBy, setModifiedBy } from './hooks/hooks'
 import seoFields from './fields/seoFields'
 
 const NutritionalInformation: CollectionConfig = {
@@ -11,10 +11,10 @@ const NutritionalInformation: CollectionConfig = {
     {
       name: 'menuItem',
       label: 'Menu Item',
-      type: 'relationship',
-      relationTo: 'menuItems',
       required: true,
       index: true,
+      type: 'relationship',
+      relationTo: 'menuItems',
     },
     {
       name: 'calories',

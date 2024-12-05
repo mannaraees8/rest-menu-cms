@@ -14,11 +14,11 @@ import Categories from './collections/Category'
 import Reviews from './collections/Reviews'
 import Ingredients from './collections/Ingredients'
 import NutritionalInformation from './collections/NutritionalInformation'
-import MenuItems from './collections/MenuItems'
 import Specials from './collections/Specials'
+import MenuItems from './collections/MenuItems'
 
 const filename = fileURLToPath(import.meta.url)
-const dirname = __dirname
+const dirname = path.dirname(filename)
 const caCert = fs.readFileSync('ca.pem')
 export default buildConfig({
   admin: {
@@ -30,8 +30,8 @@ export default buildConfig({
   collections: [
     Users,
     Categories,
-    Ingredients,
     MenuItems,
+    Ingredients,
     NutritionalInformation,
     Reviews,
     Specials,

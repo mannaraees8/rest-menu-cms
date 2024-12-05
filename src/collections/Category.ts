@@ -1,5 +1,5 @@
 import { CollectionConfig } from 'payload'
-import { beforeChangeLanguageHook, setCreatedBy, setModifiedBy } from './hooks/hooks'
+import { setCreatedBy, setModifiedBy } from './hooks/hooks'
 import { saniTizeText } from './hooks/helper'
 import seoFields from './fields/seoFields'
 import { HTMLConverterFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
