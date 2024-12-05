@@ -12,7 +12,7 @@ const NutritionalInformation: CollectionConfig = {
       name: 'menuItem',
       label: 'Menu Item',
       type: 'relationship',
-      relationTo: 'menu-items',
+      relationTo: 'menuItems',
       required: true,
       index: true,
     },

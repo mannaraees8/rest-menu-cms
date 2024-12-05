@@ -3,7 +3,7 @@ import { beforeChangeLanguageHook, setCreatedBy, setModifiedBy } from './hooks/h
 import seoFields from './fields/seoFields'
 
 const MenuItems: CollectionConfig = {
-  slug: 'menu-items',
+  slug: 'menuItems',
   admin: {
     useAsTitle: 'name',
   },
