@@ -19,7 +19,6 @@ import MenuItems from './collections/MenuItems'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
-const caCert = fs.readFileSync('ca.pem')
 export default buildConfig({
   admin: {
     user: Users.slug,
@@ -47,7 +46,6 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URI || '',
       ssl: {
         rejectUnauthorized: false, // Ensures the SSL certificate is verified
-        ca: caCert, // Add the CA certificate here
       },
     },
   }),
