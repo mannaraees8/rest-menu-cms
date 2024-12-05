@@ -18,23 +18,6 @@ const Categories: CollectionConfig = {
       index: true, // Index the title for fast search
     },
     {
-      name: 'url',
-      index: true, // Index URL for faster searches and ensure it's unique
-      label: 'Url',
-      type: 'text',
-      hooks: {
-        beforeChange: [
-          async ({ data, req }) => {
-            //@ts-ignore
-            data.url = saniTizeText(data.title)
-
-            //@ts-ignore
-            return data.url
-          },
-        ],
-      },
-    },
-    {
       name: 'content',
       label: 'Content',
       type: 'richText',
@@ -104,9 +87,6 @@ const Categories: CollectionConfig = {
   ],
   access: {
     read: () => true,
-    update: ({ req: { user } }) => true,
-    create: ({ req: { user } }) => true,
-    delete: ({ req: { user } }) => true,
   },
 }
 
